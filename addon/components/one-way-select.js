@@ -63,6 +63,12 @@ const OneWaySelectComponent = Component.extend(DynamicAttributeBindings, {
     }
 
     set(this, '_options', emberArray(options));
+
+    if (value === undefined) {
+      Ember.run.later(() => {
+        invokeAction(this, 'update', firstOption);
+      });
+    }
   },
 
   nothingSelected: empty('selectedValue'),
